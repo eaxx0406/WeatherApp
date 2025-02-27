@@ -1,0 +1,26 @@
+﻿@model WeatherApp.Models.WeatherModel
+
+@{
+    ViewData["Title"] = "Vejrudsigten";
+}
+
+<h2>Vejrudsigt</h2>
+
+<form method="post" asp-action="GetWeather">
+    <input type="text" name="city" placeholder="Indtast by" required />
+    <button type="submit">Hent Vejr</button>
+</form>
+
+@if (Model != null)
+{
+    <h3>By: @Model.City</h3>
+    <p>Temperatur: @Model.Main.Temperature °C</p>
+    <p>Beskrivelse: @Model.Weather[0].Description</p>
+    <p>Føles som:  @Model.Main.FeelsLike</p>
+
+    @if (!string.IsNullOrEmpty(Model.IconUrl))
+    {
+        <img src="@Model.IconUrl" alt="Vejrikon">
+    }
+}
+
